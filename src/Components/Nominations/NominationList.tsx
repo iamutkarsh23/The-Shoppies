@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -15,6 +15,8 @@ import {
 import { MovieModel } from "../../models-shared/movie-card";
 import { NominatedMovie } from "./NominatedMovie";
 import { NominationListProps } from "./model";
+import { PROD_URL } from "../../constants";
+import { searchMovieById } from "../../api/movies";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,11 +44,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-
 export const NominationList: React.FC<NominationListProps> = (props) => {
   const { moviesList, setNominationsList } = props;
+  console.log(moviesList);
   const classes = useStyles();
-  const disableListActionButtons = moviesList.length === 0 ? true : false
+  const disableListActionButtons = moviesList ? false : true;
   const removeNomination = (selectedMovie: MovieModel) => {
     const newNominatedMovies = moviesList.filter(
       (movie: MovieModel) => movie.imdbID !== selectedMovie.imdbID
@@ -57,6 +59,45 @@ export const NominationList: React.FC<NominationListProps> = (props) => {
 
   const removeAllNominations = () => {
     setNominationsList([]);
+  };
+
+  // on component did mount, check if there are nominations already
+  useEffect(() => {
+    const setNominatedMovies = async (ids: string[]) => {
+      const newArr = ids.map(async (value) => {
+        const movieId = value.substring(2);
+        return await searchMovieById(movieId);
+      });
+      if (newArr && newArr.length > 0) {
+        const nominatedMovies = await Promise.all(newArr);
+        const tempMoviesArr = nominatedMovies.map((movie) => {
+          if (movie?.data.Response === "False") {
+            return { Poster: "N/A", Title: "Movie not found!", Year: "N/A" };
+          } else {
+            return movie?.data;
+          }
+        });
+        setNominationsList(tempMoviesArr);
+      } else {
+        return [];
+      }
+    };
+    const movieIds: string[] = window.location.search.split(/[?&]+/);
+    if (movieIds) {
+      movieIds.shift();
+      setNominatedMovies(movieIds);
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  const getShareableMoviesLink = async () => {
+    await navigator.clipboard.writeText("");
+    const shareableLink = new URL(PROD_URL);
+    moviesList?.map((movie, index) => {
+      shareableLink.searchParams.append(index.toString(), movie.imdbID);
+    });
+    // writes to the clipboard
+    await navigator.clipboard.writeText(shareableLink.href);
   };
 
   return (
@@ -73,18 +114,22 @@ export const NominationList: React.FC<NominationListProps> = (props) => {
             component="h6"
             style={{ display: "flex", marginLeft: "16px" }}
           >
-            {moviesList?.length} nominations
+            {moviesList ? moviesList?.length : "0"} nominations
           </Typography>
         </Grid>
         <Grid item xs={2}>
-          <IconButton color="primary" disabled={disableListActionButtons}>
+          <IconButton
+            color="primary"
+            disabled={disableListActionButtons}
+            onClick={getShareableMoviesLink}
+          >
             <LinkIcon />
           </IconButton>
         </Grid>
         <Grid item xs={2}>
           <IconButton
             onClick={() => removeAllNominations()}
-            style={!disableListActionButtons ? {color: "#f5365c"} : {}}
+            style={!disableListActionButtons ? { color: "#f5365c" } : {}}
             disabled={disableListActionButtons}
           >
             <DeleteIcon />
@@ -95,6 +140,7 @@ export const NominationList: React.FC<NominationListProps> = (props) => {
       <CardContent>
         <List className={classes.root}>
           {moviesList?.length !== 0 ? (
+            moviesList &&
             moviesList?.map((movie) => (
               <NominatedMovie
                 key={movie.imdbID}

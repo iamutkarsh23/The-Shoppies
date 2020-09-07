@@ -37,7 +37,7 @@ const App = () => {
   return (
     <div className="App">
       <PageHeader />
-      {nominationsList.length === 5 ? (
+      {nominationsList?.length === 5 ? (
         <Alert
           severity="success"
           style={{ backgroundColor: "#2dce89", color: "black" }}

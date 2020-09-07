@@ -1,9 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Typography, Grid, Box, Link } from "@material-ui/core";
-// import "../Containers/App.css";
+import { Container, Typography, Grid, Box, Link, Theme } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   footerContainer: {
     background: "black",
   },
@@ -91,7 +90,7 @@ export const Footer = () => {
                 {footer.description.map((item) => (
                   <li key={item}>
                     <Link
-                      href="#"
+                      href={undefined}
                       variant="subtitle1"
                       color="textSecondary"
                       className={classes.footerFontColor}

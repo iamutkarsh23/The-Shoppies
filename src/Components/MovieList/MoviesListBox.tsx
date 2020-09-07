@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { MovieCard } from "./MovieCard";
 import { MovieModel } from "../../models-shared/movie-card";
-import { searchMovie } from "../../api/movies";
+import { searchMovieBySearchQuery } from "../../api/movies";
 import { MoviesListBoxProps } from "./model";
 import { MoonLoader } from "react-spinners";
 import { AxiosResponse } from "axios";
@@ -70,7 +70,7 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
     setLoading(true);
     console.log("page number", pageNumber);
     setPage(pageNumber);
-    const moviesResponse: AxiosResponse<any> = await searchMovie(
+    const moviesResponse: AxiosResponse<any> = await searchMovieBySearchQuery(
       value,
       pageNumber + 1
     );

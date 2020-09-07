@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const NominatedMovie: React.FC<NominatedMovieProps> = (props) => {
   const { movie, removeNomination } = props;
+  console.log(movie)
   const moviePoster =
     movie.Poster !== NO_POSTER_RESPONSE ? movie.Poster : moviePosterPlaceholder;
   const classes = useStyles();
