@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: "4px",
     },
     moviePoster: {
-      width: "150px",
+      width: "120px",
     },
     movieCardContent: {
       padding: "5px",

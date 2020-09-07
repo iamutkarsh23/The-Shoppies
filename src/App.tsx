@@ -7,6 +7,7 @@ import { MovieModel } from "./models-shared/movie-card";
 import { NominationList } from "./Components/Nominations";
 import { PageHeader } from "./Components/PageHeader/PageHeader";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { Footer } from "./Components/Footer";
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -49,7 +50,7 @@ const App = () => {
       ) : (
         <></>
       )}
-      <Grid container spacing={2}>
+      <Grid container>
         <Grid container item xs={8} spacing={2}>
           <Grid item xs={12}>
             <SearchBox onSearchMovie={onSearchMovie}></SearchBox>
@@ -71,6 +72,7 @@ const App = () => {
           />
         </Grid>
       </Grid>
+      <Footer />
     </div>
   );
 };

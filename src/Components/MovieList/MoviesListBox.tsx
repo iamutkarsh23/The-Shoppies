@@ -14,6 +14,8 @@ import { MovieModel } from "../../models-shared/movie-card";
 import { searchMovie } from "../../api/movies";
 import { MoviesListBoxProps } from "./model";
 import { MoonLoader } from "react-spinners";
+import { AxiosResponse } from "axios";
+import { HTTP_STATUS_OK } from "../../constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
     gridList: {
       width: "100%",
-      height: "800px",
+      height: "500px",
       margin: theme.spacing(1),
     },
 
@@ -68,16 +70,26 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
     setLoading(true);
     console.log("page number", pageNumber);
     setPage(pageNumber);
-    const resp: any = await searchMovie(value, pageNumber + 1);
+    const moviesResponse: AxiosResponse<any> = await searchMovie(
+      value,
+      pageNumber + 1
+    );
+    const movieData = moviesResponse?.data;
     await new Promise((resolve) => setTimeout(resolve, 500));
-    if (resp?.data?.Response === "False") {
-      setDisplayMessage(`${resp?.data?.Error} Please try searching again!`);
+    if (movieData?.Response === "False") {
+      setDisplayMessage(`${movieData?.Error} Please try searching again!`);
+      resetMovies();
+    } else if (moviesResponse?.status !== HTTP_STATUS_OK) {
+      setDisplayMessage(
+        `Oops! Something went wrong!
+        Help us improve your experience by sending a message at abc@shoppies.com`
+      );
       resetMovies();
     } else {
-      setMoviesList(resp?.data?.Search);
-      setTotalMovies(parseInt(resp?.data?.totalResults));
+      setMoviesList(movieData?.Search);
+      setTotalMovies(parseInt(movieData?.totalResults));
     }
-    console.log(resp);
+    console.log(moviesResponse);
     setLoading(false);
   };
 
@@ -114,7 +126,6 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
               }}
               onChangePage={() => console.log("New movies")}
             />
-            {/* <Card className={classes.moviesListBox}> */}
             <div className={classes.root}>
               <Grid container spacing={3} className={classes.gridList}>
                 {moviesList?.length ? (
@@ -145,7 +156,6 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
                 )}
               </Grid>
             </div>
-            {/* </Card> */}
           </Table>
         </TableContainer>
       </Card>
