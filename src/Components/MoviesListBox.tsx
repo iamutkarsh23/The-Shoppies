@@ -44,10 +44,19 @@ type MoviesListBoxProps = {
   totalMovies: number;
   onNewPage: any;
   page: number;
+  nominateMovie: any;
+  disableNominateButton: any;
 };
 
 export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
-  const { moviesList, totalMovies, onNewPage, page } = props;
+  const {
+    moviesList,
+    totalMovies,
+    onNewPage,
+    page,
+    nominateMovie,
+    disableNominateButton,
+  } = props;
 
   const classes = useStyles();
 
@@ -71,7 +80,12 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
             <div className={classes.root}>
               <Grid container spacing={3} className={classes.gridList}>
                 {moviesList?.map((movie) => (
-                  <MovieCard movie={movie} key={movie.Title} />
+                  <MovieCard
+                    movie={movie}
+                    key={movie.Title}
+                    nominateMovie={nominateMovie}
+                    disableNominateButton={disableNominateButton}
+                  />
                 ))}
               </Grid>
             </div>

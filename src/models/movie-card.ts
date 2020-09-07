@@ -1,5 +1,7 @@
 export type MovieCardProps = {
-  movie: any;
+  movie: MovieModel;
+  nominateMovie: any;
+  disableNominateButton: any;
 };
 
 export type MovieModel = {

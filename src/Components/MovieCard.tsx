@@ -9,8 +9,9 @@ import {
   Grid,
   Grow,
 } from "@material-ui/core";
-import { IMDB_URL } from "../constants";
+import { IMDB_URL, NO_POSTER_RESPONSE } from "../constants";
 import { MovieCardProps } from "../models/movie-card";
+import moviePosterPlaceholder from "../poster-placeholder.png";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +32,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const MovieCard: React.FC<MovieCardProps> = (props) => {
-  const { movie } = props;
+  const { movie, nominateMovie, disableNominateButton } = props;
+  const moviePoster =
+    movie.Poster !== NO_POSTER_RESPONSE ? movie.Poster : moviePosterPlaceholder;
+
   const classes = useStyles();
 
   const viewMovieCast = () => {
@@ -45,8 +49,8 @@ export const MovieCard: React.FC<MovieCardProps> = (props) => {
         <Card className={classes.movieCard}>
           <img
             className={classes.moviePoster}
-            src={movie.Poster}
-            alt={movie.title}
+            src={moviePoster}
+            alt={movie.Title}
           />
           <CardContent className={classes.movieCardContent}>
             <Typography gutterBottom variant="h5" component="h3">
@@ -71,6 +75,8 @@ export const MovieCard: React.FC<MovieCardProps> = (props) => {
               variant="outlined"
               color="primary"
               style={{ borderRadius: "20px" }}
+              onClick={(e) => nominateMovie(movie)}
+              disabled={disableNominateButton(movie.imdbID)}
             >
               Nominate
             </Button>
