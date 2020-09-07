@@ -152,7 +152,6 @@ export const NominationList: React.FC<NominationListProps> = (props) => {
       <CardContent>
         <List className={classes.root}>
           {moviesList?.length !== 0 ? (
-            moviesList &&
             moviesList?.map((movie) => (
               <NominatedMovie
                 key={movie.imdbID}
