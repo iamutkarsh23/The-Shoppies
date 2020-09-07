@@ -16,6 +16,7 @@
   * [Search Movie in Real-time](#search-movie-in-real-time-arrow_forward)
   * [Movie List Pagination](#movie-list-pagination-1234)
   * [View Movie Cast and Crew](#view-movie-cast-and-crew-couple)
+  * [Movie List Animation](#movie-list-animation)
   * [Nomination List](#nomination-list-inbox_tray)
   * [Remove from Nomination List](#remove-from-nomination-list-exclamation)
   * [Shareable link](#shareable-link-paperclip)
@@ -48,6 +49,12 @@ Since there are 581 movies:exclamation: for the word "fast" and lot more for oth
 ### View Movie Cast and Crew :couple:
 
 One of the important determining factors for nominating movies is the "Cast & Crew" of the movie. For solving this, I have a "View Cast" button which redirects the user to IMDB page with list of all the actors in the movie. 
+
+// TODO insert gif here
+
+### Movie List Animation
+
+Animations give a good user experience. Hence, I decided to add few animations to the nomination list so user can visualize movie "sliding" into their list. Also the movies appear scaled out. 
 
 // TODO insert gif here
 
