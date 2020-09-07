@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     searchText: {
       display: "flex",
-      marginBottom: "5px",
+      marginBottom: "15px",
     },
     searchInput: {
       marginBottom: "0px",
@@ -38,16 +38,15 @@ export const SearchBox: React.FC<SearchBoxProps> = (props: any) => {
       className={classes.root}
       noValidate
       onSubmit={(e) => e.preventDefault()}
-      autoComplete="on"
+      autoComplete="off"
     >
       <Typography component="h5" className={classes.searchText}>
-        Search for movies now
+        What are some of your favorite movies?
       </Typography>
 
       <TextField
         id="outlined-basic"
         label="Movie Title"
-        variant="outlined"
         className={classes.searchInput}
         onChange={onChange}
       />

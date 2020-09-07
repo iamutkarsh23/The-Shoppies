@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: "4px",
     },
     moviePoster: {
-      width: "200px",
+      width: "150px",
     },
     movieCardContent: {
       padding: "5px",
@@ -63,7 +63,8 @@ export const MovieCard: React.FC<MovieCardProps> = (props) => {
           <CardActions className={classes.movieCardButtons}>
             <Button
               size="small"
-              variant="outlined"
+              // variant="outlined"
+              variant="contained"
               color="primary"
               style={{ borderRadius: "20px" }}
               onClick={viewMovieCast}
@@ -72,8 +73,9 @@ export const MovieCard: React.FC<MovieCardProps> = (props) => {
             </Button>
             <Button
               size="small"
-              variant="outlined"
+              // variant="outlined"
               color="primary"
+              variant="contained"
               style={{ borderRadius: "20px" }}
               onClick={(e) => nominateMovie(movie)}
               disabled={disableNominateButton(movie.imdbID)}

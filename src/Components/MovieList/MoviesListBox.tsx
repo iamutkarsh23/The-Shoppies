@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 
 import {
@@ -7,11 +7,13 @@ import {
   TableContainer,
   Table,
   TablePagination,
+  Typography,
 } from "@material-ui/core";
 import { MovieCard } from "./MovieCard";
 import { MovieModel } from "../../models-shared/movie-card";
 import { searchMovie } from "../../api/movies";
 import { MoviesListBoxProps } from "./model";
+import { MoonLoader } from "react-spinners";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,60 +53,102 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
   // initial value of page is zero due to pagination of material ui which starts with 0
   const [page, setPage] = useState(0);
   const [totalMovies, setTotalMovies] = useState(0);
+  const [displayMessage, setDisplayMessage] = useState(
+    'Have you searched for "Fast and Furious" yet?'
+  );
 
-  useEffect(() => {
-    const onSearchMovie = async (value: any) => {
-      setPage(0);
-      const resp: any = await searchMovie(value, page + 1);
+  const resetMovies = () => {
+    setMoviesList([]);
+    setTotalMovies(0);
+  };
+
+  const [loading, setLoading] = useState(false);
+
+  const onSearchMovie = async (value: any, pageNumber: number) => {
+    setLoading(true);
+    console.log("page number", pageNumber);
+    setPage(pageNumber);
+    const resp: any = await searchMovie(value, pageNumber + 1);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    if (resp?.data?.Response === "False") {
+      setDisplayMessage(`${resp?.data?.Error} Please try searching again!`);
+      resetMovies();
+    } else {
       setMoviesList(resp?.data?.Search);
       setTotalMovies(parseInt(resp?.data?.totalResults));
-      console.log(resp);
-    };
-    onSearchMovie(searchQuery);
+    }
+    console.log(resp);
+    setLoading(false);
+  };
+
+  const queryRef: React.MutableRefObject<boolean | undefined> = useRef();
+  useEffect(() => {
+    if (!queryRef.current) {
+      queryRef.current = true;
+    } else {
+      onSearchMovie(searchQuery, 0);
+    }
     // eslint-disable-next-line
   }, [searchQuery]);
 
-  const onNewPage = async (newPageNumber: number) => {
-    setPage(newPageNumber);
-    const resp: any = await searchMovie(searchQuery, newPageNumber + 1);
-    setMoviesList(resp?.data?.Search);
-    setTotalMovies(parseInt(resp?.data?.totalResults));
-    console.log(resp);
-  };
   const classes = useStyles();
 
   return (
     <>
-      <TableContainer>
-        <Table className={classes.table} size={"medium"}>
-          <TablePagination
-            component="div"
-            count={totalMovies ? totalMovies : 0}
-            rowsPerPage={10}
-            rowsPerPageOptions={[10]}
-            page={page}
-            nextIconButtonProps={{ onClick: () => onNewPage(page + 1) }}
-            nextIconButtonText={"Next"}
-            backIconButtonText={"Previous"}
-            backIconButtonProps={{ onClick: () => onNewPage(page - 1) }}
-            onChangePage={() => console.log("New movies")}
-          />
-          <Card className={classes.moviesListBox}>
+      <Card className={classes.moviesListBox}>
+        <TableContainer>
+          <Table className={classes.table} size={"medium"}>
+            <TablePagination
+              component="tbody"
+              count={totalMovies ? totalMovies : 0}
+              rowsPerPage={10}
+              rowsPerPageOptions={[10]}
+              page={page}
+              nextIconButtonProps={{
+                onClick: () => onSearchMovie(searchQuery, page + 1),
+              }}
+              nextIconButtonText={"Next"}
+              backIconButtonText={"Previous"}
+              backIconButtonProps={{
+                onClick: () => onSearchMovie(searchQuery, page - 1),
+              }}
+              onChangePage={() => console.log("New movies")}
+            />
+            {/* <Card className={classes.moviesListBox}> */}
             <div className={classes.root}>
               <Grid container spacing={3} className={classes.gridList}>
-                {moviesList?.map((movie: MovieModel) => (
-                  <MovieCard
-                    movie={movie}
-                    key={movie.imdbID}
-                    nominateMovie={nominateMovie}
-                    disableNominateButton={disableNominateButton}
-                  />
-                ))}
+                {moviesList?.length ? (
+                  loading ? (
+                    <MoonLoader
+                      css={`
+                        display: block;
+                        margin: 0 auto;
+                      `}
+                      size={70}
+                      color={"#123abc"}
+                      loading={loading}
+                    />
+                  ) : (
+                    moviesList?.map((movie: MovieModel) => (
+                      <MovieCard
+                        movie={movie}
+                        key={movie.imdbID}
+                        nominateMovie={nominateMovie}
+                        disableNominateButton={disableNominateButton}
+                      />
+                    ))
+                  )
+                ) : (
+                  <Typography component="h4" style={{ marginLeft: "15px" }}>
+                    {displayMessage}
+                  </Typography>
+                )}
               </Grid>
             </div>
-          </Card>
-        </Table>
-      </TableContainer>
+            {/* </Card> */}
+          </Table>
+        </TableContainer>
+      </Card>
     </>
   );
 };

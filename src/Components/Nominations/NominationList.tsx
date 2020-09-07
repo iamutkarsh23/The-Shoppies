@@ -46,12 +46,13 @@ const useStyles = makeStyles((theme: Theme) =>
 export const NominationList: React.FC<NominationListProps> = (props) => {
   const { moviesList, setNominationsList } = props;
   const classes = useStyles();
-
+  const disableListActionButtons = moviesList.length === 0 ? true : false
   const removeNomination = (selectedMovie: MovieModel) => {
     const newNominatedMovies = moviesList.filter(
       (movie: MovieModel) => movie.imdbID !== selectedMovie.imdbID
     );
     setNominationsList(newNominatedMovies);
+    console.log(newNominatedMovies);
   };
 
   const removeAllNominations = () => {
@@ -68,17 +69,24 @@ export const NominationList: React.FC<NominationListProps> = (props) => {
       <Divider variant="middle" />
       <Grid container className={classes.nominationHeader}>
         <Grid item xs={8}>
-          <Typography component="h6">
+          <Typography
+            component="h6"
+            style={{ display: "flex", marginLeft: "16px" }}
+          >
             {moviesList?.length} nominations
           </Typography>
         </Grid>
         <Grid item xs={2}>
-          <IconButton color="primary">
+          <IconButton color="primary" disabled={disableListActionButtons}>
             <LinkIcon />
           </IconButton>
         </Grid>
         <Grid item xs={2}>
-          <IconButton onClick={() => removeAllNominations()}>
+          <IconButton
+            onClick={() => removeAllNominations()}
+            style={!disableListActionButtons ? {color: "#f5365c"} : {}}
+            disabled={disableListActionButtons}
+          >
             <DeleteIcon />
           </IconButton>
         </Grid>
@@ -86,13 +94,19 @@ export const NominationList: React.FC<NominationListProps> = (props) => {
       <Divider variant="middle" />
       <CardContent>
         <List className={classes.root}>
-          {moviesList?.map((movie) => (
-            <NominatedMovie
-              key={movie.imdbID}
-              movie={movie}
-              removeNomination={removeNomination}
-            />
-          ))}
+          {moviesList?.length !== 0 ? (
+            moviesList?.map((movie) => (
+              <NominatedMovie
+                key={movie.imdbID}
+                movie={movie}
+                removeNomination={removeNomination}
+              />
+            ))
+          ) : (
+            <Typography component="h5" style={{ display: "flex" }}>
+              You haven't nominated any movies.
+            </Typography>
+          )}
         </List>
       </CardContent>
     </Card>

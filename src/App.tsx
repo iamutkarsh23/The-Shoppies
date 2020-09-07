@@ -5,6 +5,8 @@ import { Grid } from "@material-ui/core";
 import { MoviesListBox } from "./Components/MovieList";
 import { MovieModel } from "./models-shared/movie-card";
 import { NominationList } from "./Components/Nominations";
+import { PageHeader } from "./Components/PageHeader/PageHeader";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -20,7 +22,7 @@ const App = () => {
     setNominationsList(newNominatedMovies);
   };
 
-  // nominations list should only contain 5 movies 
+  // nominations list should only contain 5 movies
   // and should not be able to add same move again
   const disableNominateButton = (movieId: string) => {
     return (
@@ -33,6 +35,20 @@ const App = () => {
 
   return (
     <div className="App">
+      <PageHeader />
+      {nominationsList.length === 5 ? (
+        <Alert
+          severity="success"
+          style={{ backgroundColor: "#2dce89", color: "black" }}
+        >
+          <AlertTitle style={{ display: "flex" }}>
+            You have added 5 nominations!
+          </AlertTitle>
+          To edit, remove some of your nominations from the list on the right.
+        </Alert>
+      ) : (
+        <></>
+      )}
       <Grid container spacing={2}>
         <Grid container item xs={8} spacing={2}>
           <Grid item xs={12}>
