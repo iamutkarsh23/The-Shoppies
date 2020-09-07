@@ -12,8 +12,9 @@ import {
   CardHeader,
   IconButton,
 } from "@material-ui/core";
-import { MovieModel } from "../models/movie-card";
+import { MovieModel } from "../../models-shared/movie-card";
 import { NominatedMovie } from "./NominatedMovie";
+import { NominationListProps } from "./model";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,15 +42,21 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type NominationListProps = {
-  moviesList: MovieModel[];
-  removeNomination: any;
-  removeAllNominations: any;
-};
 
 export const NominationList: React.FC<NominationListProps> = (props) => {
-  const { moviesList, removeNomination, removeAllNominations } = props;
+  const { moviesList, setNominationsList } = props;
   const classes = useStyles();
+
+  const removeNomination = (selectedMovie: MovieModel) => {
+    const newNominatedMovies = moviesList.filter(
+      (movie: MovieModel) => movie.imdbID !== selectedMovie.imdbID
+    );
+    setNominationsList(newNominatedMovies);
+  };
+
+  const removeAllNominations = () => {
+    setNominationsList([]);
+  };
 
   return (
     <Card className={classes.nominationSection}>

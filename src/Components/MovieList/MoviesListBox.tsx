@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 
 import {
@@ -7,10 +7,11 @@ import {
   TableContainer,
   Table,
   TablePagination,
-  TextField,
 } from "@material-ui/core";
 import { MovieCard } from "./MovieCard";
-import { MovieModel } from "../models/movie-card";
+import { MovieModel } from "../../models-shared/movie-card";
+import { searchMovie } from "../../api/movies";
+import { MoviesListBoxProps } from "./model";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,25 +40,37 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type MoviesListBoxProps = {
-  moviesList: MovieModel[];
-  totalMovies: number;
-  onNewPage: any;
-  page: number;
-  nominateMovie: any;
-  disableNominateButton: any;
-};
-
 export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
   const {
     moviesList,
-    totalMovies,
-    onNewPage,
-    page,
     nominateMovie,
+    setMoviesList,
     disableNominateButton,
+    searchQuery,
   } = props;
+  // initial value of page is zero due to pagination of material ui which starts with 0
+  const [page, setPage] = useState(0);
+  const [totalMovies, setTotalMovies] = useState(0);
 
+  useEffect(() => {
+    const onSearchMovie = async (value: any) => {
+      setPage(0);
+      const resp: any = await searchMovie(value, page + 1);
+      setMoviesList(resp?.data?.Search);
+      setTotalMovies(parseInt(resp?.data?.totalResults));
+      console.log(resp);
+    };
+    onSearchMovie(searchQuery);
+    // eslint-disable-next-line
+  }, [searchQuery]);
+
+  const onNewPage = async (newPageNumber: number) => {
+    setPage(newPageNumber);
+    const resp: any = await searchMovie(searchQuery, newPageNumber + 1);
+    setMoviesList(resp?.data?.Search);
+    setTotalMovies(parseInt(resp?.data?.totalResults));
+    console.log(resp);
+  };
   const classes = useStyles();
 
   return (
@@ -74,15 +87,15 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
             nextIconButtonText={"Next"}
             backIconButtonText={"Previous"}
             backIconButtonProps={{ onClick: () => onNewPage(page - 1) }}
-            onChangePage={() => console.log("change page")}
+            onChangePage={() => console.log("New movies")}
           />
           <Card className={classes.moviesListBox}>
             <div className={classes.root}>
               <Grid container spacing={3} className={classes.gridList}>
-                {moviesList?.map((movie) => (
+                {moviesList?.map((movie: MovieModel) => (
                   <MovieCard
                     movie={movie}
-                    key={movie.Title}
+                    key={movie.imdbID}
                     nominateMovie={nominateMovie}
                     disableNominateButton={disableNominateButton}
                   />

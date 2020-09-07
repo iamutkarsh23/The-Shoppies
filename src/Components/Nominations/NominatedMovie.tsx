@@ -7,9 +7,9 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton, ListItemSecondaryAction } from "@material-ui/core";
-import { MovieModel } from "../models/movie-card";
-import moviePosterPlaceholder from "../poster-placeholder.png";
-import { NO_POSTER_RESPONSE } from "../constants";
+import moviePosterPlaceholder from "../../poster-placeholder.png";
+import { NO_POSTER_RESPONSE } from "../../constants";
+import { NominatedMovieProps } from "./model";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,11 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-type NominatedMovieProps = {
-  movie: MovieModel;
-  removeNomination: any;
-};
 
 export const NominatedMovie: React.FC<NominatedMovieProps> = (props) => {
   const { movie, removeNomination } = props;

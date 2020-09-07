@@ -6,15 +6,12 @@ import { Typography } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-    //   "& > *": {
-        margin: theme.spacing(2),
-        marginBottom: '0px'
-        
-    //   },
+      margin: theme.spacing(2),
+      marginBottom: "0px",
     },
     searchText: {
       display: "flex",
-      marginBottom: "5px"
+      marginBottom: "5px",
     },
     searchInput: {
       marginBottom: "0px",
@@ -37,7 +34,12 @@ export const SearchBox: React.FC<SearchBoxProps> = (props: any) => {
   };
 
   return (
-    <form className={classes.root} noValidate onSubmit={(e) => e.preventDefault()} autoComplete="on">
+    <form
+      className={classes.root}
+      noValidate
+      onSubmit={(e) => e.preventDefault()}
+      autoComplete="on"
+    >
       <Typography component="h5" className={classes.searchText}>
         Search for movies now
       </Typography>

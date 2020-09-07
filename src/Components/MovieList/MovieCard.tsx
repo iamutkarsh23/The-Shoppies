@@ -9,9 +9,9 @@ import {
   Grid,
   Grow,
 } from "@material-ui/core";
-import { IMDB_URL, NO_POSTER_RESPONSE } from "../constants";
-import { MovieCardProps } from "../models/movie-card";
-import moviePosterPlaceholder from "../poster-placeholder.png";
+import { IMDB_URL, NO_POSTER_RESPONSE } from "../../constants";
+import moviePosterPlaceholder from "../../poster-placeholder.png";
+import { MovieCardProps } from "./model";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
