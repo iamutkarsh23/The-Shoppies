@@ -13,14 +13,14 @@
 ## Contents 
 - [Features](#features)
   * [Material-UI](#material-ui)
-  * [Search Movie in Real-time](#search-movie-in-real-time)
-  * [Movie List Pagination](#movie-list-pagination)
-  * [View Movie Cast and Crew](#view-movie-cast-and-crew)
-  * [Nomination List](#nomination-list)
-  * [Remove from Nomination List](#remove-from-nomination-list)
-  * [Shareable link](#shareable-link)
-- [Future Release Ideas](#future-release-ideas)
-- [Developer Setup](#developer-setup)
+  * [Search Movie in Real-time](#search-movie-in-real-time-arrow-forward)
+  * [Movie List Pagination](#movie-list-pagination-1234)
+  * [View Movie Cast and Crew](#view-movie-cast-and-crew-couple)
+  * [Nomination List](#nomination-list-inbox-tray)
+  * [Remove from Nomination List](#remove-from-nomination-list-exclamation)
+  * [Shareable link](#shareable-link-paperclib)
+- [Future Release Ideas](#future-release-ideas-scroll)
+- [Developer Setup](#developer-setup-wrench)
 - [Contact](#contact)
 
 
