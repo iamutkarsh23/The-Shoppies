@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -11,12 +11,14 @@ import {
   Card,
   CardHeader,
   IconButton,
+  Snackbar,
 } from "@material-ui/core";
 import { MovieModel } from "../../models-shared/movie-card";
 import { NominatedMovie } from "./NominatedMovie";
 import { NominationListProps } from "./model";
 import { PROD_URL } from "../../constants";
 import { searchMovieById } from "../../api/movies";
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,15 +48,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const NominationList: React.FC<NominationListProps> = (props) => {
   const { moviesList, setNominationsList } = props;
-  console.log(moviesList);
   const classes = useStyles();
   const disableListActionButtons = moviesList ? false : true;
+  const [clipboardSnackbar, setClipboardSnackbar] = useState(false);
   const removeNomination = (selectedMovie: MovieModel) => {
     const newNominatedMovies = moviesList.filter(
       (movie: MovieModel) => movie.imdbID !== selectedMovie.imdbID
     );
     setNominationsList(newNominatedMovies);
-    console.log(newNominatedMovies);
   };
 
   const removeAllNominations = () => {
@@ -98,10 +99,21 @@ export const NominationList: React.FC<NominationListProps> = (props) => {
     });
     // writes to the clipboard
     await navigator.clipboard.writeText(shareableLink.href);
+    setClipboardSnackbar(true);
   };
 
   return (
     <Card className={classes.nominationSection}>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={clipboardSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setClipboardSnackbar(false)}
+      >
+        <Alert onClose={() => setClipboardSnackbar(false)} severity="info">
+          Link copied to clipboard!
+        </Alert>
+      </Snackbar>
       <CardHeader
         className={classes.cardHeader}
         title="Your Nominations List"
