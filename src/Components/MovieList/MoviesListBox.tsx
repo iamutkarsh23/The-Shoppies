@@ -26,11 +26,13 @@ const useStyles = makeStyles((theme: Theme) =>
       overflow: "hidden",
       backgroundColor: theme.palette.background.paper,
       overflowY: "scroll",
+      // height: "500px",
+      maxHeight: "500px"
     },
 
     gridList: {
       width: "100%",
-      height: "500px",
+      height: "100%",
       margin: theme.spacing(1),
     },
 
@@ -93,6 +95,8 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
     setLoading(false);
   };
 
+  // component did mount don't search for movies
+  // component did update search for movies
   const queryRef: React.MutableRefObject<boolean | undefined> = useRef();
   useEffect(() => {
     if (!queryRef.current) {
@@ -150,7 +154,7 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
                     ))
                   )
                 ) : (
-                  <Typography component="h4" style={{ marginLeft: "15px" }}>
+                  <Typography component="h4" style={{ marginLeft: "15px", marginBottom: "35px" }}>
                     {displayMessage}
                   </Typography>
                 )}

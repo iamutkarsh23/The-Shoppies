@@ -45,7 +45,7 @@ export const MovieCard: React.FC<MovieCardProps> = (props) => {
 
   return (
     <Grow in timeout={1500}>
-      <Grid item xs={4}>
+      <Grid item md={4} sm={6} xs={12}>
         <Card className={classes.movieCard}>
           <img
             className={classes.moviePoster}

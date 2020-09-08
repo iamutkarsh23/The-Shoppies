@@ -29,12 +29,11 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     [theme.breakpoints.up("md")]: {
       padding: theme.spacing(6),
-      paddingRight: 0,
     },
   },
 }));
 
-export const PageHeader = () => {
+export const PageHeader: React.FC = () => {
   const classes = useStyles();
   return (
     <Paper
@@ -50,8 +49,9 @@ export const PageHeader = () => {
               variant="h3"
               color="inherit"
               gutterBottom
+              style={{ fontWeight: "bold" }}
             >
-              {"The Shoppies"}
+              {"Shoppies Movie Store"}
             </Typography>
             <Typography variant="h5" color="inherit" paragraph>
               {"Manage your movie nominations in a simpler way"}

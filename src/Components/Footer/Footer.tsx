@@ -5,10 +5,11 @@ import { Container, Typography, Grid, Box, Link, Theme } from "@material-ui/core
 const useStyles = makeStyles((theme: Theme) => ({
   footerContainer: {
     background: "black",
+    marginTop: theme.spacing(2)
   },
   footerCopyright: {
     [theme.breakpoints.up("sm")]: {
-      paddingBottom: theme.spacing(3),
+      paddingBottom: theme.spacing(4),
     },
   },
   footer: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "white",
     borderTop: `1px solid ${theme.palette.divider}`,
     paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+    paddingBottom: theme.spacing(3),
     [theme.breakpoints.up("sm")]: {
       paddingTop: theme.spacing(4),
       paddingBottom: theme.spacing(4),

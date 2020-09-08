@@ -50,8 +50,8 @@ const App = () => {
       ) : (
         <></>
       )}
-      <Grid container>
-        <Grid container item xs={8} spacing={2}>
+      <Grid container style={{marginBottom: "115px"}}>
+        <Grid container item md={8} xs={12} spacing={2}>
           <Grid item xs={12}>
             <SearchBox onSearchMovie={onSearchMovie}></SearchBox>
           </Grid>
@@ -65,7 +65,7 @@ const App = () => {
             ></MoviesListBox>
           </Grid>
         </Grid>
-        <Grid container item xs={4}>
+        <Grid container item md={4} xs={12}>
           <NominationList
             moviesList={nominationsList}
             setNominationsList={setNominationsList}
