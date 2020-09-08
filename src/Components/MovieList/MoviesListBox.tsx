@@ -17,6 +17,7 @@ import { MoonLoader } from "react-spinners";
 import { AxiosResponse } from "axios";
 import { HTTP_STATUS_OK } from "../../constants";
 
+const loaderCss = `display: block; margin: 0 auto; margin-bottom: 65px`;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -26,8 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
       overflow: "hidden",
       backgroundColor: theme.palette.background.paper,
       overflowY: "scroll",
-      // height: "500px",
-      maxHeight: "500px"
+      maxHeight: "600px",
     },
 
     gridList: {
@@ -42,6 +42,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     table: {
       width: "100%",
+    },
+    displayMessage: {
+      marginLeft: "15px",
+      marginBottom: "35px",
     },
   })
 );
@@ -70,7 +74,6 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
 
   const onSearchMovie = async (value: any, pageNumber: number) => {
     setLoading(true);
-    console.log("page number", pageNumber);
     setPage(pageNumber);
     const moviesResponse: AxiosResponse<any> = await searchMovieBySearchQuery(
       value,
@@ -91,7 +94,6 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
       setMoviesList(movieData?.Search);
       setTotalMovies(parseInt(movieData?.totalResults));
     }
-    console.log(moviesResponse);
     setLoading(false);
   };
 
@@ -135,11 +137,8 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
                 {moviesList?.length ? (
                   loading ? (
                     <MoonLoader
-                      css={`
-                        display: block;
-                        margin: 0 auto;
-                      `}
-                      size={70}
+                      css={loaderCss}
+                      size={80}
                       color={"#123abc"}
                       loading={loading}
                     />
@@ -154,7 +153,7 @@ export const MoviesListBox: React.FC<MoviesListBoxProps> = (props) => {
                     ))
                   )
                 ) : (
-                  <Typography component="h4" style={{ marginLeft: "15px", marginBottom: "35px" }}>
+                  <Typography component="h4" className={classes.displayMessage}>
                     {displayMessage}
                   </Typography>
                 )}

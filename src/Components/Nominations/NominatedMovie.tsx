@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Typography from "@material-ui/core/Typography";
+import {
+  IconButton,
+  ListItemSecondaryAction,
+  Slide,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+  Divider,
+} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { IconButton, ListItemSecondaryAction, Slide } from "@material-ui/core";
 import moviePosterPlaceholder from "../../poster-placeholder.png";
 import { NO_POSTER_RESPONSE } from "../../constants";
 import { NominatedMovieProps } from "./model";
@@ -29,7 +33,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const NominatedMovie: React.FC<NominatedMovieProps> = (props) => {
   const { movie, removeNomination } = props;
-  console.log(movie)
   const moviePoster =
     movie.Poster !== NO_POSTER_RESPONSE ? movie.Poster : moviePosterPlaceholder;
   const classes = useStyles();

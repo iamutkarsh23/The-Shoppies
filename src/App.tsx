@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { SearchBox } from "./Components/SearchBox";
 import { Grid } from "@material-ui/core";
@@ -10,9 +10,20 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import { Footer } from "./Components/Footer";
 
 const App = () => {
+  // console message
+  console.log("Welcome to the console!");
+
+  const cachedNominationsList = JSON.parse(
+    localStorage.getItem("nominations")!
+  );
+  const initialNominationsList = cachedNominationsList
+    ? cachedNominationsList
+    : [];
   const [searchQuery, setSearchQuery] = useState("");
   const [moviesList, setMoviesList] = useState<MovieModel[]>([]);
-  const [nominationsList, setNominationsList] = useState<MovieModel[]>([]);
+  const [nominationsList, setNominationsList] = useState<MovieModel[]>(
+    initialNominationsList
+  );
 
   const onSearchMovie = async (value: any) => {
     setSearchQuery(value);
@@ -34,6 +45,11 @@ const App = () => {
     );
   };
 
+  // for storing the nominations in local storage
+  useEffect(() => {
+    localStorage.setItem("nominations", JSON.stringify(nominationsList));
+  }, [nominationsList]);
+
   return (
     <div className="App">
       <PageHeader />
@@ -50,8 +66,15 @@ const App = () => {
       ) : (
         <></>
       )}
-      <Grid container style={{marginBottom: "115px"}}>
-        <Grid container item md={8} xs={12} spacing={2}>
+      <Grid container>
+        <Grid
+          container
+          item
+          md={8}
+          xs={12}
+          spacing={2}
+          style={{ display: "block" }}
+        >
           <Grid item xs={12}>
             <SearchBox onSearchMovie={onSearchMovie}></SearchBox>
           </Grid>
