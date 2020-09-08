@@ -94,7 +94,10 @@ Your nominations are safe in the local storage! So don't worry if you close the 
 
 Did you add the wrong movie to your list? :x:  You can remove the movie from you list by clicking the "trash" icon near in the list item. But wait... do you want to discard the current list and add make a new one? Use the "trash" icon on top of the list to start fresh :repeat:
 
-
+<br>
+<div align="center">
+<img src="readme_assets/remove-all-nominations.gif">
+</div>
 
 ### Shareable link :paperclip:
 
