@@ -25,63 +25,85 @@
 - [Developer Setup](#developer-setup-wrench)
 - [Contact](#contact)
 
-
-
 ## Features 
 
 ### React and Material-UI 
 
 The web app is built using React and [Material UI Components](https://material-ui.com/). React perfeclty suited my needs for this challenge and I used Material UI as they have lots of built-in customizable components and I'm familiar with the library. 
 
-// TODO insert image here
+<br>
+<div align="center">
+<img src="readme_assets/Shoppies-store-intro.gif">
+</div>
 
 ### Search Movie in Real-time :arrow_forward:
 
 You can search your movies in realtime. Just visit here and start searching for your favorite movie. This makes it easier for user to browse movies without having to press "Enter" button, which can be annoying for the user sometimes. 
 
-// TODO insert gif here
+<br>
+<div align="center">
+<img src="readme_assets/Movie-search-realtime.gif">
+</div>
 
 ### Movie List Pagination :1234:
 
 Since there are 581 movies:exclamation: for the word "fast" and lot more for others, I thought its better to have pages that user can browse through instead of a long list of movies. 
 
-// TODO insert gif here
+<br>
+<div align="center">
+<img src="readme_assets/Pagination.gif">
+</div>
 
 ### View Movie Cast and Crew :couple:
 
 One of the important determining factors for nominating movies is the "Cast & Crew" of the movie. For solving this, I have a "View Cast" button which redirects the user to IMDB page with list of all the actors in the movie. 
 
-// TODO insert gif here
+<br>
+<div align="center">
+<img src="readme_assets/movie-cast.gif">
+</div>
 
 ### Movie List Animation
 
 Animations give a good user experience. Hence, I decided to add few animations to the nomination list so user can visualize movie "sliding" into their list. Also the movies appear scaled out. 
 
-// TODO insert gif here
+<br>
+<div align="center">
+<img src="readme_assets/nomination-list-animation.gif">
+</div>
 
 ### Nomination List :inbox_tray:
 
 See a movie you like? You can add it to your list by clicking the "Nominate" button on each movie. 
 
-// TODO insert gif here
+<br>
+<div align="center">
+<img src="readme_assets/nomination-list.gif">
+</div>
 
 ### Save Nomination List On Sessions
 
 Your nominations are safe in the local storage! So don't worry if you close the tab or refresh it, they are not going to disappear. 
 
-// TODO insert gif here
+<br>
+<div align="center">
+<img src="readme_assets/save-nomination-session.gif">
+</div>
 
 ### Remove from Nomination List :exclamation:
 
 Did you add the wrong movie to your list? :x:  You can remove the movie from you list by clicking the "trash" icon near in the list item. But wait... do you want to discard the current list and add make a new one? Use the "trash" icon on top of the list to start fresh :repeat:
 
-// TODO insert gif here
+
 
 ### Shareable link :paperclip:
 
 Share your nomination list with your friends today! Just click the "link" icon in your nomination list and a link will be copied to your clipboard. 
 
-// TODO insert gif here
+<br>
+<div align="center">
+<img src="readme_assets/shareable-link.gif">
+</div>
 
 ## Future Release Ideas :scroll:
 
