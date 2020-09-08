@@ -12,12 +12,13 @@
 
 ## Contents 
 - [Features](#features)
-  * [Material-UI](#material-ui)
+  * [React and Material-UI](#react-and-material-ui)
   * [Search Movie in Real-time](#search-movie-in-real-time-arrow_forward)
   * [Movie List Pagination](#movie-list-pagination-1234)
   * [View Movie Cast and Crew](#view-movie-cast-and-crew-couple)
   * [Movie List Animation](#movie-list-animation)
   * [Nomination List](#nomination-list-inbox_tray)
+  * [Save Nomination List On Sessions](#save-nomination-list-on-sessions)
   * [Remove from Nomination List](#remove-from-nomination-list-exclamation)
   * [Shareable link](#shareable-link-paperclip)
 - [Future Release Ideas](#future-release-ideas-scroll)
@@ -28,9 +29,9 @@
 
 ## Features 
 
-### Material-UI 
+### React and Material-UI 
 
-The web app is built using [Material UI Components](https://material-ui.com/). I used them as they have lots of built-in customizable components and I'm familiar with the library. 
+The web app is built using React and [Material UI Components](https://material-ui.com/). React perfeclty suited my needs for this challenge and I used Material UI as they have lots of built-in customizable components and I'm familiar with the library. 
 
 // TODO insert image here
 
@@ -61,6 +62,12 @@ Animations give a good user experience. Hence, I decided to add few animations t
 ### Nomination List :inbox_tray:
 
 See a movie you like? You can add it to your list by clicking the "Nominate" button on each movie. 
+
+// TODO insert gif here
+
+### Save Nomination List On Sessions
+
+Your nominations are safe in the local storage! So don't worry if you close the tab or refresh it, they are not going to disappear. 
 
 // TODO insert gif here
 
@@ -99,5 +106,8 @@ The website is ready to go! <br />
 
 ## Contact
 
-Lets chat! Contact me at mindutkarsh@gmail.com
+Lets chat! Contact me at <br>
+<br>:earth_americas: &nbsp; [utkarshpatadia.com](https://utkarshpatadia.com) <br>
+<br>:inbox_tray: &nbsp; mindutkarsh@gmail.com <br>
+<br>:necktie: &nbsp; [LinkedIn](https://www.linkedin.com/in/utkarsh-patadia-a291a7171/)
 
