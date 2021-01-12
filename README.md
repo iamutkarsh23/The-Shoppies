@@ -4,7 +4,7 @@
 
 <h3 align="center">
   An app to manage movie nominations for Shoppies. 
-  <br> Shopify UX/Web Developer Internship Challenge Winter 2021
+  <br> Shopify UX/Front-end Developer Internship Challenge Summer 2021
 </h3>
 <h3 align="center">
   <a href="https://shoppies-movie-store.netlify.app/">Check out the app here</a>
