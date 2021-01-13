@@ -54,7 +54,7 @@ export const PageHeader: React.FC = () => {
               {"Shoppies Movie Store"}
             </Typography>
             <Typography variant="h5" color="inherit" paragraph>
-              {"Manage your movie nominations in a simpler way"}
+              {"A simple way to manage your movies!"}
             </Typography>
           </div>
         </Grid>

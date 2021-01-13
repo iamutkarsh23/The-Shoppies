@@ -38,14 +38,17 @@ const footerDetails = [
   {
     title: "Company",
     description: ["About", "Contact us", "Locations"],
+    correspondingLinks: ["https://www.shopify.com/about", "https://www.shopify.com/contact", "https://www.shopify.com/contact"]
   },
   {
     title: "Communities",
     description: ["For Artists", "Developers", "Brands"],
+    correspondingLinks: ["https://www.imdb.com/", "https://developers.shopify.com/","https://news.shopify.com/company-info#press-kit"]
   },
   {
     title: "Legal",
     description: ["Privacy Center", "Privacy Policy", "Cookies"],
+    correspondingLinks: ["https://www.shopify.com/legal/privacy", "https://www.shopify.com/legal/privacy", "https://developers.shopify.com/"]
   },
 ];
 
@@ -58,7 +61,7 @@ function Copyright() {
       style={{ color: "white" }}
     >
       {"Copyright © "}
-      <Link color="inherit" href="#" style={{ color: "white" }}>
+      <Link color="inherit" href="https://shoppies-movie-store.netlify.app/" style={{ color: "white" }}>
         Shopify
       </Link>{" "}
       {new Date().getFullYear()}
@@ -88,10 +91,10 @@ export const Footer = () => {
                 {footer.title}
               </Typography>
               <ul>
-                {footer.description.map((item) => (
+                {footer.description.map((item, index) => (
                   <li key={item}>
                     <Link
-                      href={undefined}
+                      href={footer.correspondingLinks[index]}
                       variant="subtitle1"
                       color="textSecondary"
                       className={classes.footerFontColor}

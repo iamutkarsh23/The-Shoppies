@@ -46,7 +46,8 @@ export const SearchBox: React.FC<SearchBoxProps> = (props: any) => {
 
       <TextField
         id="outlined-basic"
-        label="Movie Title"
+        // label="Movie Title"
+        placeholder="Try typing 'harry'..."
         className={classes.searchInput}
         onChange={onChange}
       />
